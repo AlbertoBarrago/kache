@@ -25,8 +25,8 @@
   "scripts": {
     "basic-usage": "node example/basic-usage.js",
     "benchmark": "node benchmark/performance-test.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles test/kache.memory.test.js --forceExit",
-    "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles test/kache.redis.test.js"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.memory.test.js --forceExit",
+    "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.redis.test.js --forceExit"
   },
   "devDependencies": {
     "axios": "^1.6.0",
