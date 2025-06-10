@@ -8,7 +8,7 @@ import {performance} from 'node:perf_hooks';
  */
 async function benchmarkRequest(client, url) {
     const start = performance.now();
-    const response = await client.get(url); // response is the full AxiosResponse
+    const response = await client.get(url);
     const end = performance.now();
 
     const duration = (end - start).toFixed(2);
