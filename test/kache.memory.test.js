@@ -27,14 +27,4 @@ describe('Kachy HTTP caching', () => {
 
     expect(time2).toBeLessThan(time1);
   });
-
-  test('should support redis cache if available', async () => {
-    const client = kachy({ cache: { type: 'redis', ttl: 60 } });
-
-    const res1 = await client.get(url);
-    const res2 = await client.get(url);
-
-    expect(res1.data).toEqual(res2.data);
-    expect(res2.statusText).toMatch('OK (kache HIT)');
-  });
 });

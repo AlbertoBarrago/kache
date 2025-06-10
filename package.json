@@ -9,8 +9,10 @@
     "node-cache": "^5.1.2"
   },
   "scripts": {
-    "benchmark": "node example/index.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles"
+    "basic-usage": "node example/basic-usage.js",
+    "benchmark": "node benchmark/performance-test.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles test/kache.memory.test.js",
+    "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles test/kache.redis.test.js"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

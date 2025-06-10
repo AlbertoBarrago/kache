@@ -27,11 +27,13 @@ export default function kache(options = {}) {
     // Select the cache storage mechanism based on the provided type, defaulting to memory cache.
     const cacheType = options.cache?.type === 'redis' ? redisCache : memoryCache;
 
-    // --- Request Interceptor ---
+    // --- Request Interceptor
     // This interceptor runs before any request is sent.
     // Its primary role is to check for cached responses for GET requests.
     client.interceptors.request.use(async (config) => {
         // Bypass caching logic for non-GET requests.
+        // Caching is generally limited to GET requests due to their idempotent nature,
+        // unlike methods like POST, PUT, PATCH, and DELETE which modify server state.
         if (config.method?.toLowerCase() !== 'get') {
             return config;
         }

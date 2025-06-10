@@ -1,6 +1,7 @@
-# kache
+ # kache
 
-A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache. Ideal for reducing server load and redundant network calls.
+A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache. 
+Ideal for reducing server load and redundant network calls.
 
 ## Features
 
