@@ -25,11 +25,18 @@ Ideal for reducing server load and redundant network calls.
 
 ## Installation
 
-Install `kache` using npm:
+Install `kache` and its peer dependency `axios` using your preferred package manager (I use npm):
 
-Or using yarn:
+```npm
+npm i kache
+```
 
-*Note: `axios` is a peer dependency and needs to be installed alongside `kache`.*
+> #### Note on Dependencies:
+> - *_axios_*: This is a peer dependency. 
+ *You must install it* in your project alongside kache for kache to function correctly.
+> - *_Caching Drivers_*: `kache` includes `ioredis` (for Redis support) and `node-cache` 
+ (for in-memory caching) as direct dependencies. 
+ You do not need to install these separately.
 
 ## Usage
 
