@@ -25,13 +25,15 @@
   "scripts": {
     "basic-usage": "node example/basic-usage.js",
     "benchmark": "node benchmark/performance-test.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.memory.test.js --detectOpenHandles",
-    "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.redis.test.js --detectOpenHandles"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.memory.test.js --forceExit",
+    "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.redis.test.js --forceExit",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "axios": "^1.6.0",
     "@types/jest": "^29.5.14",
+    "axios": "^1.6.0",
     "cross-env": "^7.0.3",
+    "husky": "^9.1.7",
     "jest": "^30.0.0"
   }
 }
