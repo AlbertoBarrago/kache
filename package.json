@@ -10,6 +10,18 @@
   "peerDependencies": {
     "axios": "^1.6.0"
   },
+  "keywords": [
+    "cache",
+    "http",
+    "client",
+    "axios",
+    "redis",
+    "in-memory",
+    "caching",
+    "api",
+    "performance",
+    "node"
+  ],
   "scripts": {
     "basic-usage": "node example/basic-usage.js",
     "benchmark": "node benchmark/performance-test.js",
