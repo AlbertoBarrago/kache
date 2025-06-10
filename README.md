@@ -99,5 +99,7 @@ Please make sure to update tests as appropriate and follow the existing code sty
 
 This project is licensed under the MIT License—see the `LICENSE` file for details.
 
+**Enjoy** 😉
+
 
 
