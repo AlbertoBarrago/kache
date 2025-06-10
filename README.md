@@ -45,7 +45,7 @@ npm i @balby/kache
 ## Usage
 
 ```js
-import kache from 'kache';
+import kache from '@balby/kache';
 
 const client = kache({
     cache: {type: 'redis', ttl: 60}
