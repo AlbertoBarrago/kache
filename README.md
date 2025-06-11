@@ -1,11 +1,12 @@
 # @balby/kache
+A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache.
+Ideal for reducing server load and redundant network calls.
+
 
 [![npm version](https://badge.fury.io/js/%40balby%2Fkache.svg)](https://badge.fury.io/js/%40balby%2Fkache)
 [![npm downloads](https://img.shields.io/npm/dm/%40balby%2Fkache.svg)](https://www.npmjs.com/package/%40balby%2Fkache)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache.
-Ideal for reducing server load and redundant network calls.
 
 ## Why kache?
 
