@@ -37,5 +37,9 @@
     "husky": "^9.1.7",
     "jest": "^30.0.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlbertoBarrago/kache.git"
+  },
   "license": "MIT"
 }
