@@ -1,4 +1,4 @@
-import keyBuilder from '../service/keyBuilder.js';
+import keyBuilder from '../services/keyBuilder.js';
 
 describe('keyBuilder', () => {
     const baseURL = 'https://api.example.com/resource';

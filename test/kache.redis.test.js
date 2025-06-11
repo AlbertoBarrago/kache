@@ -1,6 +1,6 @@
 import kache from '../index.js';
 import Redis from 'ioredis';
-import buildCacheKey from "../service/keyBuilder.js";
+import buildCacheKey from "../services/keyBuilder.js";
 
 describe('Kache Redis Integration Tests (with real network calls)', () => {
   let redisClient;
