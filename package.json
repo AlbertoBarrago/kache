@@ -27,6 +27,7 @@
     "benchmark": "node benchmark/performance-test.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.memory.test.js --forceExit",
     "test:redis-integration": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.redis.test.js --forceExit",
+    "test:service": "cross-env NODE_OPTIONS=--experimental-vm-modules jest test/kache.services.test.js --forceExit",
     "prepare": "husky"
   },
   "devDependencies": {

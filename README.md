@@ -32,7 +32,7 @@ Ideal for reducing server load and redundant network calls.
 Install `kache` and its peer dependency `axios` using your preferred package manager (I use npm):
 
 ```npm
-npm i @balby/kache
+npm i @balby/kache axios
 ```
 
 > #### Note on Dependencies:

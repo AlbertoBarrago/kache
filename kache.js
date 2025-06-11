@@ -1,7 +1,7 @@
 import axios from 'axios';
 import redisCache from './cache/redisCache.js';
 import memoryCache from './cache/memoryCache.js';
-import buildCacheKey from './keyBuilder.js';
+import buildCacheKey from './service/keyBuilder.js';
 
 /**
  * Creates an Axios client instance enhanced with caching capabilities.
