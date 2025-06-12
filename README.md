@@ -6,6 +6,8 @@ Ideal for reducing server load and redundant network calls.
 [![npm version](https://badge.fury.io/js/%40balby%2Fkache.svg)](https://badge.fury.io/js/%40balby%2Fkache)
 [![npm downloads](https://img.shields.io/npm/dm/%40balby%2Fkache.svg)](https://www.npmjs.com/package/%40balby%2Fkache)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/AlbertoBarrago/kache?style=social)](https://github.com/AlbertoBarrago/kache/stargazers)
+
 
 ## TypeScript Support
 
