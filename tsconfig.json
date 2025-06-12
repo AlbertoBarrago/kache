@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "strict": true,
+    "allowJs": true,
+    "checkJs": false,
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "resolveJsonModule": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist",
+
+    "maxNodeModuleJsDepth": 1,
+
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    "target": "ES2020",
+    "lib": ["ESNext", "DOM"],
+
+    "skipLibCheck": true
+  },
+  "include": [
+    "./index.js",
+    "./kache.js",
+    "./services/**/*.js",
+    "./cache/**/*.js"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "test/**/*",
+    "example/**/*",
+    "benchmark/**/*",
+    "jest.config.js",
+    "coverage/**/*"
+  ]
+}

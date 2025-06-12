@@ -7,6 +7,10 @@ Ideal for reducing server load and redundant network calls.
 [![npm downloads](https://img.shields.io/npm/dm/%40balby%2Fkache.svg)](https://www.npmjs.com/package/%40balby%2Fkache)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## TypeScript Support
+
+`@balby/kache` now ships with built-in type definitions, providing an improved developer experience with type safety and autocompletion in TypeScript projects.
+
 
 ## Why kache?
 
