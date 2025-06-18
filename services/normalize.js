@@ -1,5 +1,5 @@
 /**
- * Normalizes header keys to lowercase.
+ * Normalizes header keys to the lowercase.
  * @param {object | undefined} headers - The header object.
  * @returns {object} A new object with lowercase header keys.
  */

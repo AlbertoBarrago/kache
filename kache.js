@@ -3,7 +3,8 @@ import redisCache from './cache/redisCache.js';
 import memoryCache from './cache/memoryCache.js';
 import buildCacheKey from './services/keyBuilder.js';
 import normalizeHeaders from "./services/normalize.js";
-import {STATUS} from "./const/index.js";
+import {CACHE_TYPE, STATUS} from "./const"
+import {assignHeaders, isValidResponse} from "./services/utils.js";
 
 /**
  * @typedef {object} KacheCacheOptions
@@ -29,32 +30,24 @@ import {STATUS} from "./const/index.js";
  * @returns {import('axios').AxiosInstance} An Axios instance augmented with caching.
  */
 export default function kache(options = {}) {
-    const client = options.axiosInstance || axios.create();
-
-    const cacheIsActive = options.cache?.cacheIsActive !== undefined ? options.cache.cacheIsActive : true;
-
-    const ttl = options.cache?.ttl || 60;
-
-    const cacheType = options.cache?.type === 'redis' ? redisCache : memoryCache;
-
+    const client = options.axiosInstance || axios.create(),
+        cacheIsActive = options.cache?.cacheIsActive !== undefined ? options.cache.cacheIsActive : true,
+        ttl = options.cache?.ttl || 60,
+        cacheType = options.cache?.type === CACHE_TYPE.REDIS ? redisCache : memoryCache;
 
     client.interceptors.request.use(async (config) => {
 
-        if (config.method?.toLowerCase() !== 'get') {
-            return config;
-        }
-
-        if (!cacheIsActive) {
+        if (config.method?.toLowerCase() !== 'get' || !cacheIsActive) {
             return config;
         }
 
         const key = buildCacheKey(config);
+
         const cachedItem = await cacheType.get(key);
 
         if (cachedItem) {
             const hitHeaders = {...cachedItem.headers};
             hitHeaders['x-kache'] = STATUS.HIT;
-
 
             config.adapter = () => Promise.resolve({
                 data: cachedItem.data,
@@ -63,8 +56,9 @@ export default function kache(options = {}) {
                 headers: hitHeaders,
                 config: config
             });
+
         } else {
-            config.metadata = { ...config.metadata, cacheKey: key};
+            config.metadata = {...config.metadata, cacheKey: key};
         }
         return config;
     });
@@ -73,16 +67,11 @@ export default function kache(options = {}) {
     client.interceptors.response.use(async (response) => {
         const key = response.config.metadata?.cacheKey;
 
-        if (key &&
-            response.config.method?.toLowerCase() === 'get' &&
-            response.status >= 200 &&
-            response.status < 300) {
+        if (key && isValidResponse(response)) {
 
             let newHeaders = normalizeHeaders(response.headers);
 
-            newHeaders['cache-control'] = `public, max-age=${ttl}`;
-            newHeaders['expires'] = new Date(Date.now() + ttl * 1000).toUTCString();
-            newHeaders['x-kache'] = cacheIsActive ? STATUS.MISS : STATUS.BYPASS;
+            assignHeaders(newHeaders, cacheIsActive, ttl);
 
             const itemToCache = {
                 data: response.data,
