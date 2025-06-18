@@ -1,4 +1,6 @@
 import keyBuilder from '../services/keyBuilder.js';
+import normalizeHeaders from "../services/normalize.js";
+import {isValidResponse} from "../services/utils.js";
 
 describe('keyBuilder', () => {
     const baseURL = 'https://api.example.com/resource';
@@ -98,3 +100,102 @@ describe('keyBuilder', () => {
         expect(keyBuilder(config1)).not.toBe(keyBuilder(config3));
     });
 });
+
+describe('normalizeHeaders', () => {
+    it("should return an empty object if headers are undefined", () => {
+        const headers = undefined;
+        const normalizedHeaders = normalizeHeaders(headers);
+        expect(normalizedHeaders).toEqual({});
+    })
+
+    it("should return an empty object if headers are null", () => {
+        const headers = null;
+        const normalizedHeaders = normalizeHeaders(headers);
+        expect(normalizedHeaders).toEqual({});
+    })
+
+    it("should return an empty object if headers are empty", () => {
+        const headers = {};
+        const normalizedHeaders = normalizeHeaders(headers);
+        expect(normalizedHeaders).toEqual({});
+    })
+
+    it("should return an object with normalized keys", () => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Content-Length': '123',
+            'X-Custom-Header': 'custom-value'
+        };
+        const normalizedHeaders = normalizeHeaders(headers);
+        expect(normalizedHeaders).toEqual({
+            'content-type': 'application/json',
+            'content-length': '123',
+            'x-custom-header': 'custom-value'
+        });
+    })
+
+    it("should return an object with normalized keys and lowercased values", () => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Content-Length': '123',
+            'x-Custom-header': 'custom-value-2'
+        }
+        const normalizedHeaders = normalizeHeaders(headers);
+        expect(normalizedHeaders).toEqual({
+            'content-type': 'application/json',
+            'content-length': '123',
+            'x-custom-header': 'custom-value-2'
+        })
+    })
+})
+
+describe('isValidResponse', () => {
+    it('should return false if response is undefined', () => {
+        const response = undefined;
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+    it('should return false if response is null', () => {
+        const response = null;
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+    it('should return false if response status is not 2xx', () => {
+        const response = {
+            status: 404,
+            statusText: 'Not Found',
+            headers: {},
+            config: {}
+        };
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+    it('should return false if response status is 2xx but headers are missing', () => {
+        const response = {
+            status: 200,
+            statusText: 'OK',
+        }
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+    it('should return false if response headers are missing', () => {
+        const response = {
+            status: 200,
+            statusText: 'OK',
+            headers: {},
+            config: {}
+        }
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+    it('should return false if response headers are missing "x-kache" header', () => {
+        const response = {
+            status: 200,
+            statusText: 'OK',
+            headers: {},
+            config: {}
+        }
+        const isValid = isValidResponse(response);
+        expect(isValid).toBe(false);
+    })
+})
