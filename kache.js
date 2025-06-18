@@ -1,21 +1,29 @@
 import axios from 'axios';
 import redisCache from './cache/redisCache.js';
 import memoryCache from './cache/memoryCache.js';
-import buildCacheKey from './keyBuilder.js';
+import buildCacheKey from './services/keyBuilder.js';
 
 /**
- * Creates an Axios client instance enhanced with caching capabilities.
- * This function intercepts HTTP GET requests to serve them from a cache (memory or Redis)
- * if available and valid, and caches responses for future use.
- * It also adds HTTP caching headers (Cache-Control, Expires) to responses.
+ * @typedef {object} KacheCacheOptions
+ * @property {'redis' | 'memory'} [type='memory'] - Cache backend type ('redis' or 'memory').
+ * @property {number} [ttl=60] - Default Time To Live (TTL) in seconds for cache entries.
+ * @property {object} [redisOptions] - Options for `ioredis` (if type is 'redis').
+ * @property {object} [nodeCacheOptions] - Options for `node-cache` (if type is 'memory').
+ */
+
+/**
+ * @typedef {object} KacheGlobalOptions
+ * @property {import('axios').AxiosInstance} [axiosInstance] - Optional pre-configured Axios instance. If not provided, a new one is created.
+ * @property {KacheCacheOptions} [cache] - Cache-specific configurations.
+ */
+
+/**
+ * Creates an Axios client instance with caching capabilities.
+ * Intercepts GET requests to serve from cache (memory/Redis) or cache new responses.
+ * Adds 'Cache-Control', 'Expires', and 'x-kache' headers.
  *
- * @param {Object} [options={}] - Configuration options for the kache client.
- * @param {import('axios').AxiosInstance} [options.axiosInstance] - An optional, pre-configured Axios instance. If not provided, a new one is created.
- * @param {Object} [options.cache] - Cache-specific configurations.
- * @param {'redis'|'memory'} [options.cache.type='memory'] - The type of cache backend to use. Defaults to 'memory'.
- * @param {number} [options.cache.ttl=60] - The default Time To Live (TTL) in seconds for cache entries.
- *                                          This also dictates the 'max-age' for the 'Cache-Control' HTTP header. Defaults to 60 seconds.
- * @returns {import('axios').AxiosInstance} An Axios instance augmented with caching interceptors.
+ * @param {KacheGlobalOptions} [options={}] - Configuration options.
+ * @returns {import('axios').AxiosInstance} An Axios instance augmented with caching.
  */
 export default function kache(options = {}) {
     // Initialize the Axios client: use a provided instance or create a new one.

@@ -1,11 +1,18 @@
 # @balby/kache
+A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache.
+Ideal for reducing server load and redundant network calls.
+
 
 [![npm version](https://badge.fury.io/js/%40balby%2Fkache.svg)](https://badge.fury.io/js/%40balby%2Fkache)
 [![npm downloads](https://img.shields.io/npm/dm/%40balby%2Fkache.svg)](https://www.npmjs.com/package/%40balby%2Fkache)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/AlbertoBarrago/kache?style=social)](https://github.com/AlbertoBarrago/kache/stargazers)
 
-A smart HTTP client for Node.js that caches API responses using Redis or in-memory cache.
-Ideal for reducing server load and redundant network calls.
+
+## TypeScript Support
+
+`@balby/kache` now ships with built-in type definitions, providing an improved developer experience with type safety and autocompletion in TypeScript projects.
+
 
 ## Why kache?
 
@@ -32,7 +39,7 @@ Ideal for reducing server load and redundant network calls.
 Install `kache` and its peer dependency `axios` using your preferred package manager (I use npm):
 
 ```npm
-npm i @balby/kache
+npm i @balby/kache axios
 ```
 
 > #### Note on Dependencies:
@@ -45,7 +52,7 @@ npm i @balby/kache
 ## Usage
 
 ```js
-import kache from 'kache';
+import kache from '@balby/kache';
 
 const client = kache({
     cache: {type: 'redis', ttl: 60}
@@ -98,6 +105,8 @@ Please make sure to update tests as appropriate and follow the existing code sty
 ## License
 
 This project is licensed under the MIT License—see the `LICENSE` file for details.
+
+**Enjoy** 😉
 
 
 

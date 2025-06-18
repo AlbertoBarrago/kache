@@ -15,7 +15,7 @@ describe('Kachy HTTP caching', () => {
   });
 
   test('should return faster response on cache hit (memory)', async () => {
-    const client = kachy({ cache: { type: 'memory', ttl: 60 } });
+    const client = kachy({ cache: { type: 'memory', ttl: 6 } });
 
     const start1 = performance.now();
     await client.get(url);
