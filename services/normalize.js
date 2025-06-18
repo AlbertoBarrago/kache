@@ -1,7 +1,10 @@
 /**
- * Normalizes header keys to the lowercase.
- * @param {object | undefined} headers - The header object.
- * @returns {object} A new object with lowercase header keys.
+ * Returns a new object with all header keys converted to lowercase.
+ * 
+ * Accepts a headers object, which may be a plain object or an AxiosHeaders instance. If the input has a `toJSON` method, it is used to obtain a plain object before normalization.
+ * 
+ * @param {object | undefined} headers - The headers to normalize.
+ * @returns {object} An object with all header keys in lowercase.
  */
 export default function normalizeHeaders(headers) {
     const newHeaders = {};

@@ -22,12 +22,12 @@ import {assignHeaders, isValidResponse} from "./services/utils.js";
  */
 
 /**
- * Creates an Axios client instance with caching capabilities.
- * Intercepts GET requests to serve from cache (memory/Redis) or cache new responses.
- * Adds 'Cache-Control', 'Expires', and 'x-kache' headers.
+ * Returns an Axios instance with transparent caching for GET requests using memory or Redis backends.
+ * 
+ * GET requests are intercepted to serve responses from cache when available, or to cache new responses with appropriate headers (`Cache-Control`, `Expires`, and `x-kache`). Caching behavior and backend are configurable via options.
  *
- * @param {KacheGlobalOptions} [options={}] - Configuration options.
- * @returns {import('axios').AxiosInstance} An Axios instance augmented with caching.
+ * @param {KacheGlobalOptions} [options={}] - Optional configuration for Axios instance and caching behavior.
+ * @returns {import('axios').AxiosInstance} An Axios instance enhanced with automatic response caching.
  */
 export default function kache(options = {}) {
     const client = options.axiosInstance || axios.create(),
