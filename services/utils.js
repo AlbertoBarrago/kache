@@ -1,9 +1,12 @@
 import {HTTP_STATUS, STATUS} from "../const/index.js";
 
 /**
- * @description Is Valid Response is a util function that verifies if the response is valid
- * @param response
- * @returns {boolean}
+ * Determines whether an HTTP response object is valid based on required properties and expected values.
+ * 
+ * The response is considered valid if it has a config object, status and statusText fields, headers with a 'content-type' including 'application/json', a data property that is an object, the HTTP method is 'GET', and the status code is between 200 (inclusive) and 300 (exclusive).
+ * 
+ * @param {object} response - The HTTP response object to validate.
+ * @returns {boolean} True if the response meets all validation criteria; otherwise, false.
  */
 export function isValidResponse(response) {
     if (!response || !response.config
@@ -22,11 +25,13 @@ export function isValidResponse(response) {
 }
 
 /**
- * @description Assign Headers to response
- * @param newHeaders
- * @param cacheIsActive
- * @param ttl
- * @returns {*}
+ * Sets cache-related HTTP headers on the provided headers object.
+ *
+ * Modifies the headers to include 'cache-control' with a public directive and max-age, an 'expires' header set to the current time plus the specified TTL (in seconds), and a custom 'x-kache' header indicating cache status.
+ * @param {object} newHeaders - The headers object to modify.
+ * @param {boolean} cacheIsActive - Whether caching is active.
+ * @param {number} ttl - Time-to-live in seconds for cache expiration.
+ * @returns {object} The modified headers object.
  */
 export function assignHeaders(newHeaders, cacheIsActive, ttl) {
     newHeaders['cache-control'] = `public, max-age=${ttl}`;
